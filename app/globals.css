@@ -28,6 +28,12 @@
   --status-dev-bg: #fffbeb;
   --status-dev-fg: #b45309;
   --status-dev-border: rgba(245, 158, 11, 0.28);
+  --status-production-bg: #eff6ff;
+  --status-production-fg: #1d4ed8;
+  --status-production-border: rgba(59, 130, 246, 0.26);
+  --status-paused-bg: #f8fafc;
+  --status-paused-fg: #64748b;
+  --status-paused-border: rgba(100, 116, 139, 0.24);
 }
 
 .dark {
@@ -59,6 +65,12 @@
   --status-dev-bg: rgba(146, 64, 14, 0.26);
   --status-dev-fg: #fcd34d;
   --status-dev-border: rgba(245, 158, 11, 0.24);
+  --status-production-bg: rgba(29, 78, 216, 0.18);
+  --status-production-fg: #93c5fd;
+  --status-production-border: rgba(59, 130, 246, 0.22);
+  --status-paused-bg: rgba(51, 65, 85, 0.36);
+  --status-paused-fg: #94a3b8;
+  --status-paused-border: rgba(100, 116, 139, 0.2);
 }
 
 @theme inline {

@@ -85,17 +85,17 @@ function ArchitectureCard() {
   const layers = [
     {
       label: "Frontend",
-      items: ["Next.js", "TypeScript", "Tailwind CSS"],
+      items: ["Next.js", "TypeScript", "Tailwind CSS", "Shadcn/ui"],
       color: "bg-teal-400",
     },
     {
       label: "Backend",
-      items: ["FastAPI", "Node.js", "REST · gRPC"],
+      items: ["FastAPI", "Node.js", "REST · Django"],
       color: "bg-blue-400",
     },
     {
       label: "Data",
-      items: ["PostgreSQL", "Pipelines", "NLP"],
+      items: ["PostgreSQL", "Pipelines", "NLP","Minio"],
       color: "bg-violet-400",
     },
     {

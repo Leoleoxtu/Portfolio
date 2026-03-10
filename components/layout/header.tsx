@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/layout/container";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
@@ -19,7 +20,14 @@ export function Header() {
             href="/"
             className="flex items-center gap-2 font-mono text-sm font-medium text-foreground transition-colors hover:text-accent"
           >
-            <span className="text-accent font-semibold">LS</span>
+            <Image
+              src="/logo.png"
+              alt={`${siteConfig.name} logo`}
+              width={32}
+              height={32}
+              className="h-8 w-8 rounded-md object-contain"
+              priority
+            />
             <span className="hidden sm:inline text-foreground/70">/</span>
             <span className="hidden sm:inline">{siteConfig.name}</span>
           </Link>

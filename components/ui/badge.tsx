@@ -1,6 +1,14 @@
 import { cn } from "@/lib/utils";
 
-type BadgeVariant = "default" | "accent" | "muted" | "status-public" | "status-private" | "status-dev";
+type BadgeVariant =
+  | "default"
+  | "accent"
+  | "muted"
+  | "status-public"
+  | "status-private"
+  | "status-dev"
+  | "status-production"
+  | "status-paused";
 
 interface BadgeProps {
   children: React.ReactNode;
@@ -21,6 +29,10 @@ const variantClasses: Record<BadgeVariant, string> = {
     "border border-[var(--status-private-border)] bg-[var(--status-private-bg)] text-[var(--status-private-fg)]",
   "status-dev":
     "border border-[var(--status-dev-border)] bg-[var(--status-dev-bg)] text-[var(--status-dev-fg)]",
+  "status-production":
+    "border border-[var(--status-production-border)] bg-[var(--status-production-bg)] text-[var(--status-production-fg)]",
+  "status-paused":
+    "border border-[var(--status-paused-border)] bg-[var(--status-paused-bg)] text-[var(--status-paused-fg)]",
 };
 
 export function Badge({ children, variant = "default", className }: BadgeProps) {

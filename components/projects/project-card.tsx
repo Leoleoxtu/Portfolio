@@ -3,6 +3,12 @@ import Link from "next/link";
 import type { CSSProperties } from "react";
 import { Project } from "@/types/project";
 import { Badge } from "@/components/ui/badge";
+import {
+  activityStatusLabel,
+  activityStatusVariant,
+  repositoryVisibilityLabel,
+  repositoryVisibilityVariant,
+} from "@/lib/project-badges";
 import { cn } from "@/lib/utils";
 
 interface ProjectCardProps {
@@ -11,21 +17,6 @@ interface ProjectCardProps {
   variant?: "featured" | "compact";
   className?: string;
 }
-
-const statusLabel: Record<Project["status"], string> = {
-  public: "Public",
-  private: "Private",
-  "in-development": "In Development",
-};
-
-const statusVariant: Record<
-  Project["status"],
-  "status-public" | "status-private" | "status-dev"
-> = {
-  public: "status-public",
-  private: "status-private",
-  "in-development": "status-dev",
-};
 
 const categoryLabel: Record<Project["category"], string> = {
   saas: "SaaS",
@@ -85,15 +76,20 @@ export function ProjectCard({
         <div className="mb-3 flex items-start justify-between gap-3">
           <h3
             className={cn(
-              "font-semibold leading-snug text-foreground",
+              "flex-1 font-semibold leading-snug text-foreground",
               isFeatured ? "text-lg" : "text-base"
             )}
           >
             {project.title}
           </h3>
-          <Badge variant={statusVariant[project.status]} className="shrink-0 mt-0.5">
-            {statusLabel[project.status]}
-          </Badge>
+          <div className="mt-0.5 flex max-w-[50%] flex-wrap justify-end gap-2">
+            <Badge variant={repositoryVisibilityVariant[project.repositoryVisibility]}>
+              {repositoryVisibilityLabel[project.repositoryVisibility]}
+            </Badge>
+            <Badge variant={activityStatusVariant[project.activityStatus]}>
+              {activityStatusLabel[project.activityStatus]}
+            </Badge>
+          </div>
         </div>
 
         {/* Description */}

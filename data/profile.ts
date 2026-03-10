@@ -9,6 +9,9 @@ export const profile = {
   title: "Full-Stack Developer",
   subtitle: "Backend · Infrastructure · Data Systems",
   tagline: "Designing and building real-world software systems.",
+  email: "leox77100@gmail.com",
+  github: "https://github.com/Leoleoxtu",
+  linkedin: "https://www.linkedin.com/in/leo-sollvelles-2538a21b0/",
 
   bio: [
     "I'm a full-stack developer focused on building real-world software systems. My work spans SaaS platforms, backend architectures, data pipelines and AI-driven tools — with an emphasis on well-structured code, clean architecture and systems that hold up in production.",
