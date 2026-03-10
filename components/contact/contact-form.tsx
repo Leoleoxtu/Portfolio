@@ -7,34 +7,53 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { profile } from "@/data/profile";
 
-type SubmitState = "idle" | "redirecting";
+type SubmitState = "idle" | "submitting" | "success" | "error";
 
 export function ContactForm() {
   const [submitState, setSubmitState] = useState<SubmitState>("idle");
+  const [feedback, setFeedback] = useState<string>("");
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setSubmitState("redirecting");
+    setSubmitState("submitting");
+    setFeedback("");
 
-    const formData = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const formData = new FormData(form);
     const name = String(formData.get("name") ?? "").trim();
     const email = String(formData.get("email") ?? "").trim();
     const message = String(formData.get("message") ?? "").trim();
+    const company = String(formData.get("company") ?? "");
 
-    const subject = encodeURIComponent(`Portfolio contact from ${name || "a visitor"}`);
-    const body = encodeURIComponent(
-      [
-        name ? `Name: ${name}` : "",
-        email ? `Email: ${email}` : "",
-        "",
-        message,
-      ]
-        .filter(Boolean)
-        .join("\n")
-    );
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          message,
+          company,
+        }),
+      });
 
-    window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`;
-    setSubmitState("idle");
+      const result = (await response.json()) as { error?: string };
+
+      if (!response.ok) {
+        setSubmitState("error");
+        setFeedback(result.error || "Unable to send the message right now.");
+        return;
+      }
+
+      form.reset();
+      setSubmitState("success");
+      setFeedback("Message sent successfully. I’ll get back to you soon.");
+    } catch {
+      setSubmitState("error");
+      setFeedback("A network error occurred. Please try again.");
+    }
   }
 
   return (
@@ -49,9 +68,9 @@ export function ContactForm() {
               Send a simple message.
             </h2>
             <p className="mb-6 text-sm leading-relaxed text-muted sm:text-base">
-              This form is frontend-only for now. It opens your email client with
-              the message prefilled, and the structure is ready to be connected later
-              to an API or email service.
+              Messages are sent directly from the site to my inbox. The form stays
+              simple on the surface, with a server-side structure that is easy to
+              maintain and extend later if needed.
             </p>
             <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface-soft)] p-5">
               <p className="mb-2 font-mono text-xs uppercase tracking-widest text-muted">
@@ -75,6 +94,15 @@ export function ContactForm() {
             </CardHeader>
             <CardContent>
               <form className="space-y-5" onSubmit={handleSubmit}>
+                <input
+                  type="text"
+                  name="company"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  className="hidden"
+                  aria-hidden="true"
+                />
+
                 <div>
                   <label
                     htmlFor="name"
@@ -129,19 +157,35 @@ export function ContactForm() {
                 </div>
 
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                  <p className="text-xs leading-relaxed text-muted">
-                    Submitting opens your default email client with the message ready to send.
+                  <p
+                    className="text-xs leading-relaxed text-muted"
+                    aria-live="polite"
+                  >
+                    {feedback ||
+                      "Messages are sent directly from the site and delivered to my inbox."}
                   </p>
                   <Button
                     type="submit"
                     size="md"
                     className="min-w-40"
-                    disabled={submitState === "redirecting"}
+                    disabled={submitState === "submitting"}
                   >
                     <Send className="h-4 w-4" />
-                    {submitState === "redirecting" ? "Opening..." : "Send message"}
+                    {submitState === "submitting" ? "Sending..." : "Send message"}
                   </Button>
                 </div>
+
+                {submitState === "success" && (
+                  <p className="rounded-xl border border-emerald-500/20 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-600 dark:text-emerald-300">
+                    {feedback}
+                  </p>
+                )}
+
+                {submitState === "error" && (
+                  <p className="rounded-xl border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm text-red-600 dark:text-red-300">
+                    {feedback}
+                  </p>
+                )}
               </form>
             </CardContent>
           </Card>

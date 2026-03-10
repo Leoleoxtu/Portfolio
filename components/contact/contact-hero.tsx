@@ -23,7 +23,7 @@ export function ContactHero() {
               href={`mailto:${profile.email}`}
               className="inline-flex h-11 items-center justify-center rounded-lg bg-accent px-6 text-sm font-semibold text-accent-foreground shadow-sm transition-colors hover:bg-accent/90"
             >
-              Email me
+              Email
             </a>
             <a
               href={profile.github}
