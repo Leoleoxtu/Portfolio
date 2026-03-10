@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Container } from "@/components/layout/container";
+import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { siteConfig } from "@/data/site";
 
 const navLinks = [
@@ -12,7 +13,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--border)] bg-[var(--surface)]/80 backdrop-blur-md">
       <Container>
-        <div className="flex h-14 items-center justify-between">
+        <div className="flex flex-col gap-3 py-3 sm:h-14 sm:flex-row sm:items-center sm:justify-between sm:py-0">
           {/* Logo */}
           <Link
             href="/"
@@ -23,26 +24,30 @@ export function Header() {
             <span className="hidden sm:inline">{siteConfig.name}</span>
           </Link>
 
-          {/* Nav */}
-          <nav className="flex items-center gap-1">
-            {navLinks.map(({ href, label }) => (
-              <Link
-                key={href}
-                href={href}
+          <div className="flex flex-wrap items-center justify-between gap-3 sm:flex-nowrap sm:justify-end">
+            {/* Nav */}
+            <nav className="flex flex-wrap items-center gap-1">
+              {navLinks.map(({ href, label }) => (
+                <Link
+                  key={href}
+                  href={href}
+                  className="rounded-md px-3 py-1.5 text-sm font-medium text-muted transition-colors hover:bg-[var(--surface)] hover:text-foreground"
+                >
+                  {label}
+                </Link>
+              ))}
+              <a
+                href={siteConfig.github}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="rounded-md px-3 py-1.5 text-sm font-medium text-muted transition-colors hover:bg-[var(--surface)] hover:text-foreground"
               >
-                {label}
-              </Link>
-            ))}
-            <a
-              href={siteConfig.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="ml-2 rounded-md px-3 py-1.5 text-sm font-medium text-muted transition-colors hover:bg-[var(--surface)] hover:text-foreground"
-            >
-              GitHub
-            </a>
-          </nav>
+                GitHub
+              </a>
+            </nav>
+
+            <ThemeToggle />
+          </div>
         </div>
       </Container>
     </header>

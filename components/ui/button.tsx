@@ -13,7 +13,7 @@ const variantClasses: Record<ButtonVariant, string> = {
   primary:
     "bg-accent text-accent-foreground hover:bg-accent/90 shadow-sm",
   secondary:
-    "bg-[var(--surface-strong)] text-foreground border border-[var(--border)] hover:bg-white/90 shadow-sm",
+    "bg-[var(--surface-strong)] text-foreground border border-[var(--border)] hover:bg-[var(--surface-soft-hover)] shadow-sm",
   ghost:
     "text-foreground hover:bg-[var(--surface)] hover:text-accent",
   outline:

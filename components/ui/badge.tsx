@@ -10,17 +10,17 @@ interface BadgeProps {
 
 const variantClasses: Record<BadgeVariant, string> = {
   default:
-    "bg-white/60 text-foreground border border-[var(--border)]",
+    "bg-[var(--surface-soft)] text-foreground border border-[var(--border)]",
   accent:
     "bg-accent/10 text-accent border border-accent/20",
   muted:
     "bg-[var(--surface)] text-muted border border-[var(--border)]",
   "status-public":
-    "bg-emerald-50 text-emerald-700 border border-emerald-200/60",
+    "border border-[var(--status-public-border)] bg-[var(--status-public-bg)] text-[var(--status-public-fg)]",
   "status-private":
-    "bg-slate-100 text-slate-500 border border-slate-200/60",
+    "border border-[var(--status-private-border)] bg-[var(--status-private-bg)] text-[var(--status-private-fg)]",
   "status-dev":
-    "bg-amber-50 text-amber-700 border border-amber-200/60",
+    "border border-[var(--status-dev-border)] bg-[var(--status-dev-bg)] text-[var(--status-dev-fg)]",
 };
 
 export function Badge({ children, variant = "default", className }: BadgeProps) {

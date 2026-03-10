@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { CSSProperties } from "react";
 import { Project } from "@/types/project";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
@@ -55,7 +56,7 @@ export function ProjectCard({
       ─────────────────────────────────────────────────────────────────────── */}
       <div
         className={cn(
-          "relative w-full overflow-hidden bg-gradient-to-br from-slate-100 to-slate-50",
+          "relative w-full overflow-hidden bg-[var(--surface-soft)]",
           isFeatured ? "h-48 sm:h-52" : "h-36"
         )}
       >
@@ -105,7 +106,7 @@ export function ProjectCard({
           {project.stack.slice(0, 5).map((tech) => (
             <span
               key={tech}
-              className="rounded-md border border-[var(--border)] bg-white/50 px-2 py-0.5 font-mono text-xs text-muted"
+              className="rounded-md border border-[var(--border)] bg-[var(--surface-soft)] px-2 py-0.5 font-mono text-xs text-muted"
             >
               {tech}
             </span>
@@ -126,7 +127,7 @@ export function ProjectCard({
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-8 items-center justify-center rounded-lg border border-[var(--border)] bg-white/60 px-3 text-xs font-medium text-muted transition-colors hover:text-foreground hover:bg-white/90"
+              className="inline-flex h-8 items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--surface-soft)] px-3 text-xs font-medium text-muted transition-colors hover:bg-[var(--surface-soft-hover)] hover:text-foreground"
             >
               GitHub
             </a>
@@ -143,11 +144,11 @@ export function ProjectCard({
    Each category gets a subtle visual hint so the grid doesn't look uniform.
 ──────────────────────────────────────────────────────────────────────────── */
 const categoryAccents: Record<Project["category"], string> = {
-  saas: "from-teal-50/80 to-teal-100/40",
-  data: "from-blue-50/80 to-blue-100/40",
-  security: "from-violet-50/80 to-violet-100/40",
-  ai: "from-amber-50/80 to-amber-100/40",
-  tool: "from-slate-50/80 to-slate-100/40",
+  saas: "#14b8a6",
+  data: "#3b82f6",
+  security: "#8b5cf6",
+  ai: "#f59e0b",
+  tool: "#64748b",
 };
 
 function ThumbnailPlaceholder({
@@ -158,14 +159,13 @@ function ThumbnailPlaceholder({
   category: Project["category"];
 }) {
   const initial = title.slice(0, 2).toUpperCase();
+  const accent = categoryAccents[category];
+  const gradientStyle = {
+    background: `linear-gradient(135deg, color-mix(in srgb, ${accent} 18%, var(--surface-soft-hover)), color-mix(in srgb, ${accent} 8%, var(--background)))`,
+  } satisfies CSSProperties;
 
   return (
-    <div
-      className={cn(
-        "flex h-full w-full items-center justify-center bg-gradient-to-br",
-        categoryAccents[category]
-      )}
-    >
+    <div className="flex h-full w-full items-center justify-center" style={gradientStyle}>
       <div className="flex flex-col items-center gap-2 opacity-40">
         <span className="font-mono text-3xl font-bold tracking-tight text-foreground">
           {initial}

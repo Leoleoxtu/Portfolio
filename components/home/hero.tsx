@@ -52,7 +52,7 @@ export function Hero() {
                 href={siteConfig.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex h-11 items-center justify-center rounded-lg border border-[var(--border)] bg-white/70 px-6 text-sm font-semibold text-foreground shadow-sm transition-colors hover:bg-white/90"
+                className="inline-flex h-11 items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--surface-soft)] px-6 text-sm font-semibold text-foreground shadow-sm transition-colors hover:bg-[var(--surface-soft-hover)]"
               >
                 GitHub →
               </a>
@@ -131,7 +131,7 @@ function ArchitectureCard() {
               {layer.items.map((item) => (
                 <span
                   key={item}
-                  className="rounded-md border border-[var(--border)] bg-white/50 px-2 py-0.5 font-mono text-xs text-foreground/70"
+                  className="rounded-md border border-[var(--border)] bg-[var(--surface-soft)] px-2 py-0.5 font-mono text-xs text-foreground/70"
                 >
                   {item}
                 </span>

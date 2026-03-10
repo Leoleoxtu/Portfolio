@@ -51,7 +51,7 @@ export function Intro() {
               {domains.map((domain) => (
                 <span
                   key={domain}
-                  className="rounded-full border border-[var(--border)] bg-white/60 px-3 py-1 font-mono text-xs font-medium text-foreground/70"
+                  className="rounded-full border border-[var(--border)] bg-[var(--surface-soft)] px-3 py-1 font-mono text-xs font-medium text-foreground/70"
                 >
                   {domain}
                 </span>

@@ -6,9 +6,59 @@
   --muted: #5b667a;
   --surface: rgba(255, 255, 255, 0.78);
   --surface-strong: rgba(255, 255, 255, 0.94);
+  --surface-soft: rgba(255, 255, 255, 0.62);
+  --surface-soft-hover: rgba(255, 255, 255, 0.88);
   --border: rgba(148, 163, 184, 0.22);
+  --border-strong: rgba(255, 255, 255, 0.7);
   --accent: #0f766e;
   --accent-foreground: #ecfeff;
+  --selection: rgba(15, 118, 110, 0.16);
+  --backdrop-accent: rgba(15, 118, 110, 0.12);
+  --backdrop-ink: rgba(15, 23, 42, 0.08);
+  --backdrop-base-start: #f7f9fc;
+  --backdrop-base-end: #eff3f8;
+  --shadow-soft: rgba(15, 23, 42, 0.28);
+  --shadow-strong: rgba(15, 23, 42, 0.34);
+  --status-public-bg: #ecfdf5;
+  --status-public-fg: #047857;
+  --status-public-border: rgba(16, 185, 129, 0.24);
+  --status-private-bg: #f1f5f9;
+  --status-private-fg: #475569;
+  --status-private-border: rgba(148, 163, 184, 0.24);
+  --status-dev-bg: #fffbeb;
+  --status-dev-fg: #b45309;
+  --status-dev-border: rgba(245, 158, 11, 0.28);
+}
+
+.dark {
+  color-scheme: dark;
+  --background: #07111b;
+  --foreground: #e2e8f0;
+  --muted: #94a3b8;
+  --surface: rgba(8, 18, 30, 0.78);
+  --surface-strong: rgba(10, 22, 36, 0.92);
+  --surface-soft: rgba(15, 31, 48, 0.76);
+  --surface-soft-hover: rgba(21, 41, 62, 0.92);
+  --border: rgba(148, 163, 184, 0.16);
+  --border-strong: rgba(148, 163, 184, 0.2);
+  --accent: #2dd4bf;
+  --accent-foreground: #052e2b;
+  --selection: rgba(45, 212, 191, 0.22);
+  --backdrop-accent: rgba(13, 148, 136, 0.2);
+  --backdrop-ink: rgba(15, 23, 42, 0.42);
+  --backdrop-base-start: #08131f;
+  --backdrop-base-end: #040b12;
+  --shadow-soft: rgba(2, 8, 23, 0.52);
+  --shadow-strong: rgba(2, 8, 23, 0.72);
+  --status-public-bg: rgba(6, 95, 70, 0.22);
+  --status-public-fg: #6ee7b7;
+  --status-public-border: rgba(16, 185, 129, 0.22);
+  --status-private-bg: rgba(51, 65, 85, 0.48);
+  --status-private-fg: #cbd5e1;
+  --status-private-border: rgba(148, 163, 184, 0.16);
+  --status-dev-bg: rgba(146, 64, 14, 0.26);
+  --status-dev-fg: #fcd34d;
+  --status-dev-border: rgba(245, 158, 11, 0.24);
 }
 
 @theme inline {
@@ -17,6 +67,7 @@
   --color-muted: var(--muted);
   --color-surface: var(--surface);
   --color-surface-strong: var(--surface-strong);
+  --color-surface-soft: var(--surface-soft);
   --color-border: var(--border);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
@@ -29,10 +80,11 @@
 }
 
 html {
+  color-scheme: light;
   background:
-    radial-gradient(circle at top left, rgba(15, 118, 110, 0.12), transparent 34%),
-    radial-gradient(circle at top right, rgba(15, 23, 42, 0.08), transparent 28%),
-    linear-gradient(180deg, #f7f9fc 0%, #eff3f8 100%);
+    radial-gradient(circle at top left, var(--backdrop-accent), transparent 34%),
+    radial-gradient(circle at top right, var(--backdrop-ink), transparent 28%),
+    linear-gradient(180deg, var(--backdrop-base-start) 0%, var(--backdrop-base-end) 100%);
 }
 
 body {
@@ -43,7 +95,7 @@ body {
 }
 
 ::selection {
-  background: rgba(15, 118, 110, 0.16);
+  background: var(--selection);
 }
 
 a {
@@ -62,11 +114,12 @@ a {
 
 @layer components {
   .surface {
-    @apply rounded-[28px] border border-border bg-surface shadow-[0_24px_80px_-36px_rgba(15,23,42,0.28)] backdrop-blur;
+    @apply rounded-[28px] border border-border bg-surface shadow-[0_24px_80px_-36px_var(--shadow-soft)] backdrop-blur;
   }
 
   .surface-strong {
-    @apply rounded-[32px] border border-white/70 bg-surface-strong shadow-[0_28px_100px_-40px_rgba(15,23,42,0.34)];
+    @apply rounded-[32px] border bg-surface-strong shadow-[0_28px_100px_-40px_var(--shadow-strong)];
+    border-color: var(--border-strong);
   }
 
   .section-label {
@@ -74,6 +127,6 @@ a {
   }
 
   .eyebrow-line {
-    @apply h-px w-12 bg-slate-300/70;
+    @apply h-px w-12 bg-border;
   }
 }
